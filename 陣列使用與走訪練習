@@ -1,0 +1,166 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _1215
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            MyHomeWork01();
+            MyHomeWork02();
+        }
+
+        static void MyHomeWork01()
+        {
+            // 宣告陣列
+            int[] intArray = new int[10];
+            float[] floatArray = new float[8];
+            double[] doubleArray = new double[4];
+            string[] stringArray = new string[5];
+
+            // 整數陣列輸入與輸出
+            Console.WriteLine("請輸入 10 個整數：");
+            for (int i = 0; i < intArray.Length; i++)
+            {
+                intArray[i] = GetValidInput<int>($"整數[{i + 1}]: ");
+            }
+            PrintArrayAndAverage(intArray);
+
+            // 浮點數陣列輸入與輸出
+            Console.WriteLine("請輸入 8 個浮點數：");
+            for (int i = 0; i < floatArray.Length; i++)
+            {
+                floatArray[i] = GetValidInput<float>($"浮點數[{i + 1}]: ");
+            }
+            PrintArrayAndAverage(floatArray);
+
+            // 倍精確度數字陣列輸入與輸出
+            Console.WriteLine("請輸入 4 個倍精確度數字：");
+            for (int i = 0; i < doubleArray.Length; i++)
+            {
+                doubleArray[i] = GetValidInput<double>($"倍精確度數字[{i + 1}]: ");
+            }
+            PrintArrayAndAverage(doubleArray);
+
+            // 字串陣列輸入與輸出
+            Console.WriteLine("請輸入 5 個字串：");
+            for (int i = 0; i < stringArray.Length; i++)
+            {
+                stringArray[i] = GetValidInput<string>($"字串[{i + 1}]: ");
+            }
+            PrintArray(stringArray);
+        }
+
+        static void MyHomeWork02()
+        {
+            // 以給定初始值宣告陣列
+            int[] intArray = { 1, 2, 3, 4, 5 };
+            float[] floatArray = { 1.2f, 2.3f, 3.4f, 4.5f, 5.6f };
+            double[] doubleArray = { 1.22, 2.33, 3.44, 4.55, 5.66 };
+            string[] stringArray = { "王小明", "陳大明", "李小英", "張小美", "陳不良" };
+
+            // 印出陣列資料與平均值
+            PrintArrayAndAverage(intArray);
+            PrintArrayAndAverage(floatArray);
+            PrintArrayAndAverage(doubleArray);
+            PrintArray(stringArray);
+        }
+
+        static T GetValidInput<T>(string prompt)
+        {
+            while (true)
+            {
+                Console.Write(prompt);
+                try
+                {
+                    if (typeof(T) == typeof(int))
+                    {
+                        return (T)(object)int.Parse(Console.ReadLine());
+                    }
+                    else if (typeof(T) == typeof(float))
+                    {
+                        return (T)(object)float.Parse(Console.ReadLine());
+                    }
+                    else if (typeof(T) == typeof(double))
+                    {
+                        return (T)(object)double.Parse(Console.ReadLine());
+                    }
+                    else if (typeof(T) == typeof(string))
+                    {
+                        return (T)(object)Console.ReadLine();
+                    }
+                }
+                catch
+                {
+                    Console.WriteLine("輸入錯誤，請再試一次。");
+                }
+            }
+        }
+
+        static void PrintArrayAndAverage<T>(T[] array) where T : struct
+        {
+            Console.WriteLine("陣列內容：");
+            foreach (var item in array)
+            {
+                Console.WriteLine(item);
+            }
+
+            if (array is int[] intArr)
+            {
+                Console.WriteLine($"平均值: {Average(intArr)}\n");
+            }
+            else if (array is float[] floatArr)
+            {
+                Console.WriteLine($"平均值: {Average(floatArr)}\n");
+            }
+            else if (array is double[] doubleArr)
+            {
+                Console.WriteLine($"平均值: {Average(doubleArr)}\n");
+            }
+        }
+
+        static void PrintArray(string[] array)
+        {
+            Console.WriteLine("陣列內容：");
+            foreach (var item in array)
+            {
+                Console.WriteLine(item);
+            }
+            Console.WriteLine();
+        }
+
+        static double Average(int[] array)
+        {
+            double sum = 0;
+            foreach (var item in array)
+            {
+                sum += item;
+            }
+            return sum / array.Length;
+        }
+
+        static double Average(float[] array)
+        {
+            double sum = 0;
+            foreach (var item in array)
+            {
+                sum += item;
+            }
+            return sum / array.Length;
+        }
+
+        static double Average(double[] array)
+        {
+            double sum = 0;
+            foreach (var item in array)
+            {
+                sum += item;
+            }
+            return sum / array.Length;
+        }
+    }
+}
